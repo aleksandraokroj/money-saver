@@ -1,0 +1,59 @@
+<div class="fill-window">
+<div class="container">
+    <div class="forms-container">
+        <div class="signin-signup">
+            <form action="" class="sign-in-form">
+                <h2 class="title">Logowanie</h2>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Email" name="Email" [(ngModel)]="user.Email"/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Hasło" name="Password"  [(ngModel)]="user.Password"/>
+                </div>
+                <input type="submit" value="Zaloguj się" class="btn solid" (click)="loginUser()">
+            </form>
+            <form action="" class="sign-up-form">
+                <h2 class="title">Zarejestruj się</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Imię"/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Email" name="Email" [(ngModel)]="newUser.Email"/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Hasło" name="Password" [(ngModel)]="newUser.Password"/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Potwierdź hasło" name="ConfirmPassword" [(ngModel)]="newUser.ConfirmPassword"/>
+                </div>
+                <button type="submit" class="btn solid" (click)="registerUser()">Stwórz konto</button>
+            </form>
+        </div>
+    </div>
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>Nie masz jeszcze konta?</h3>
+                <p>Money Saver to aplikacja pozwalająca na uzyskanie kontroli nad swoim budżetem poprzez zapisywanie wydatków i przychodów,
+                     wyznaczanie celów oraz spersonalizowane statystki. Aby z niej skorzystać, musisz być zarejestrowanym użytkownikiem. </p>
+                <button class="btn transparent" id="sign-up-button" (click)="animateSignUp()">Załóż konto</button>
+            </div>
+            <img src="././assets/img/login-image.svg" class="image" alt=""/>
+        </div>
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>Masz już konto?</h3>
+                <p>Jeżeli jesteś zarejestrowanym użytkownikiem, przejdź do panelu logowania.</p>
+                <button class="btn transparent" id="sign-in-button" (click)="animateSignIn()">Zaloguj się</button>
+            </div>
+            <img src="././assets/img/register-image.svg" class="image" alt=""/>
+        </div>
+    </div>
+</div>
+</div>
