@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, map, Observable } from 'rxjs';
 import { AuthServiceService } from '../auth-service.service';
+import { HttpClient } from  '@angular/common/http';
 
 @Component({
   selector: 'app-authentication',
@@ -8,7 +10,8 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class AuthenticationComponent implements OnInit {
 
-  constructor(private authService: AuthServiceService) { }
+  constructor(private authService: AuthServiceService,
+    private http: HttpClient) { }
   
   public newUser= {
     Email: '',
@@ -20,6 +23,7 @@ export class AuthenticationComponent implements OnInit {
     Password: ''
   }
   public data: any;
+  private configUrl = "https://localhost:44330/api/account/login";
 
   ngOnInit(): void {
   }
@@ -38,8 +42,8 @@ export class AuthenticationComponent implements OnInit {
     this.authService.registerUser(this.newUser);
   }
 
-  public loginUser(): void{
-  this.authService.loginUser(this.user).subscribe(response => console.log(response.text()));
+  public loginUser(): any{
+    return this.authService.loginUser(this.user);
   }
   
   private getSelectors(): any{
