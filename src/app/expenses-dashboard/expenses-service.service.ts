@@ -16,4 +16,12 @@ export class ExpensesService {
     public getExpenses(): Observable<any>{
         return this.http.get('https://localhost:44330/api/Expenses');
     }
+
+    public showModal(): void {
+
+    }
+
+    public deleteExpense(id: any): Observable<any>{
+      return this.http.delete('https://localhost:44330/api/Expenses'+`/${id}`)
+    }
 }

@@ -11,24 +11,26 @@ import { AgGridModule } from 'ag-grid-angular';
 import { GoalsDashboardComponent } from './goals-dashboard/goals-dashboard.component';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SideBarComponent } from './side-bar/side-bar.component';@NgModule({
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { ActionCellRendererComponent } from './action-cell-renderer/action-cell-renderer.component';@NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     ExpensesDashboardComponent,
     GoalsDashboardComponent,
     SideBarComponent,
+    ActionCellRendererComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ActionCellRendererComponent]),
     MatSidenavModule, 
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ActionCellRendererComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,9 @@
     class="ag-theme-alpine expenses-table"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
+    [frameworkComponents]="frameworkComponents"
+    [domLayout]="domLayout"
+    (gridReady)="onGridReady($event)"
   >
   </ag-grid-angular>
 </div>
