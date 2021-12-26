@@ -1,11 +1,12 @@
 body {
-    background-color: #F4F4F4;
+    background-color: #f4f4f4;
 }
 
 .table-div {
     display: flex;
-    justify-content: center;
-    width: 100%
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 .expenses-table {
@@ -29,10 +30,21 @@ label,
 
 .btn-save {
     color: white;
-    background-color: #6C63FF;
+    background-color: #6c63ff;
 }
 
 .modal-footer {
     border-top: none;
     margin-top: 5px;
+}
+
+.btn-add {
+    color: white;
+    background-color: #457604;
+    margin-top: 10px;
+    margin-left: 63%;
+}
+
+.table-title {
+    margin: 20px;
 }

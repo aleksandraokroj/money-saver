@@ -2,15 +2,19 @@
 <app-side-bar>
 </app-side-bar>
 <div class="table-div">
+  <h1 class="table-title">Twoje wydatki</h1>
   <ag-grid-angular
-    class="ag-theme-alpine expenses-table"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents"
-    [domLayout]="domLayout"
-    (gridReady)="onGridReady($event)"
+  class="ag-theme-alpine expenses-table"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [frameworkComponents]="frameworkComponents"
+  [domLayout]="domLayout"
+  [pagination]="true"
+  [paginationPageSize]="paginationPageSize"
+  (gridReady)="onGridReady($event)"
   >
-  </ag-grid-angular>
+</ag-grid-angular>
+<button type="button" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> Dodaj wpis</button>
 </div>
 <!--Modal Edit-->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" *ngIf="editedExpense">
@@ -55,4 +59,29 @@
     </div>
   </div>
  </div>
+ </div>
+ <!--Modal Add-->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" *ngIf="editedExpense">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj wpis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Nazwa</label><input class="form-control" type="text" placeholder="Nazwa" [(ngModel)]="newExpense.expenseName">
+        <label>Typ</label><select class="form-select"[(ngModel)]="newExpense.expenseType">
+         <option value="Wydatek">Wydatek</option>
+         <option value="Przychód">Przychód</option>
+       </select>
+        <label>Kategoria</label><input class="form-control" type="text" placeholder="Kategoria" [(ngModel)]="newExpense.expenseCategory">
+        <label>Kwota</label><input class="form-control" type="number" placeholder="Kwota" [(ngModel)]="newExpense.expenseAmount">
+        <label>Data</label><input class="form-control" type="date"[(ngModel)]="newExpense.expenseDate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-save" (click)="postExpense()" data-bs-dismiss="modal">Dodaj</button>
+      </div>
+    </div>
+  </div>
  </div>

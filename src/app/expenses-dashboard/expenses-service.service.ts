@@ -27,6 +27,11 @@ export class ExpensesService {
     return this.http.get('https://localhost:44330/api/Expenses');
   }
 
+  public postExpense(expense: any): Observable<any> {
+    const headers = {"Access-Control-Allow-Origin": "*"};
+    return this.http.post('https://localhost:44330/api/Expenses', expense, {headers});
+  }
+
   public editExpense(id: any, expense: any): Observable<any>{
     const headers = {"Access-Control-Allow-Origin": "*"};
     return this.http.put('https://localhost:44330/api/Expenses' + `/${id}`, expense, {headers});
