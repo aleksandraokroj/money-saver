@@ -18,7 +18,6 @@ export class ActionCellRendererComponent
 
   agInit(params: any): void {
     this.params = params;
-    console.log(params);
     return this.params.value;
   }
 
@@ -26,14 +25,15 @@ export class ActionCellRendererComponent
     return false;
   }
 
-  editExpense(): void {
-    return console.log(this.params.edit);
-  }
-
   deleteExpense(): void {
-    // this.expensesService.deleteExpense(this.params.data.expenseId).subscribe(res => {
-    //   this.params.getExpenses;
-    // });
     this.expensesDashboard.deleteExpense(this.params.data.expenseId);
   }
+
+  showEditModal(): any{
+    var editModal = document.getElementById('editModal');
+    if(editModal){
+      this.expensesService.setEditedExpense(this.params.data);
+    }
+  }
 }
+

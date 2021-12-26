@@ -13,23 +13,27 @@ export class ExpensesDashboardComponent implements OnInit {
   rowData: any;
   frameworkComponents: any = {
     'actionCellRenderer': ActionCellRendererComponent
-};  
-  
+};
+
   constructor(private expensesService: ExpensesService) {}
   
   public expenses: any;
   public domLayout: string = 'autoHeight'
+  public editedExpense: any;
+
   private api: any;
   private columnApi: any;
   
   ngOnInit(): void {
+    this.editedExpense = '';
     this.getExpenses();
+    this.setSubscriptions();
   }
-
+  
   onGridReady = (params: any) => {
     this.api = params.api;
     this.columnApi = params.columnApi;
-}
+  }
   
   columnDefs: ColDef[] = [
     {
@@ -47,21 +51,30 @@ export class ExpensesDashboardComponent implements OnInit {
     {
       field: 'expenseAmount',
       headerName: 'Kwota',
+      cellRenderer: params => params.value + ' zł',
       width: 150,
     },
     { field: 'expenseDate', headerName: 'Data', width: 150 },
   ];
-
+  
   getExpenses(): void{
     this.expensesService.getExpenses().subscribe((res) => {
       this.rowData = res;
       this.rowData.forEach((expense: { expenseDate: string, expenseAmount: any }) => {
-        expense.expenseAmount = expense.expenseAmount.toFixed(2) + ' zł';
+        expense.expenseAmount = expense.expenseAmount.toFixed(2);
         expense.expenseDate = expense.expenseDate.slice(0, 10);
       });
     });
   }
 
+  editExpense(): void{
+    const expenseAmountHelper: number = +this.editedExpense.expenseAmount;
+    this.editedExpense.expenseAmount = expenseAmountHelper;
+    this.expensesService.editExpense(this.editedExpense.expenseId, this.editedExpense).subscribe(res => {
+      this.getExpenses();
+    })
+  }
+  
   deleteExpense(id: any): void{
     const confirm = window.confirm('Czy na pewno chcesz usunąć ten wpis?');
     if(confirm){
@@ -69,6 +82,12 @@ export class ExpensesDashboardComponent implements OnInit {
         this.getExpenses();
       });
     }
+  };
+
+  setSubscriptions(): void{
+    this.expensesService.editedExpenseSubject.subscribe(editedExpense => {
+      this.editedExpense = editedExpense;
+    });
   }
 
 }

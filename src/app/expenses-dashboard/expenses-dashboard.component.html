@@ -12,4 +12,29 @@
   >
   </ag-grid-angular>
 </div>
+<!--Modal Edit-->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" *ngIf="editedExpense">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Edytuj wpis</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     </div>
+     <div class="modal-body">
+       <label>Nazwa</label><input class="form-control" type="text" [value]="editedExpense.expenseName" [(ngModel)]="editedExpense.expenseName">
+       <label>Typ</label><select class="form-select" aria-label="Default select example" [value]="editedExpense.expenseType" [(ngModel)]="editedExpense.expenseType">
+        <option value="Wydatek">Wydatek</option>
+        <option value="Przychód">Przychód</option>
+      </select>
+       <label>Kategoria</label><input class="form-control" type="text" [value]="editedExpense.expenseCategory" [(ngModel)]="editedExpense.expenseCategory">
+       <label>Kwota</label><input class="form-control" type="number" [value]="editedExpense.expenseAmount" [(ngModel)]="editedExpense.expenseAmount">
+       <label>Data</label><input class="form-control" type="date" [value]="editedExpense.expenseDate" [(ngModel)]="editedExpense.expenseDate">
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+       <button type="button" class="btn btn-save" (click)="editExpense()" data-bs-dismiss="modal">Zapisz</button>
+     </div>
+   </div>
+ </div>
+</div>
 </div>

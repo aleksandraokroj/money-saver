@@ -16,3 +16,18 @@ body {
 .wrapper-div {
     display: flex;
 }
+
+.modal-body {
+    margin: 5px;
+}
+
+label,
+.form-control,
+.form-select {
+    margin-bottom: 5px;
+}
+
+.btn-save {
+    color: white;
+    background-color: #6C63FF;
+}
