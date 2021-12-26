@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ExpensesService } from '../expenses-dashboard/expenses-service.service';
 import { ExpensesDashboardComponent } from '../expenses-dashboard/expenses-dashboard.component';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-action-cell-renderer',
@@ -25,8 +26,11 @@ export class ActionCellRendererComponent
     return false;
   }
 
-  deleteExpense(): void {
-    this.expensesDashboard.deleteExpense(this.params.data.expenseId);
+  showDeleteModal(): any{
+    var deleteModal = document.getElementById('deleteModal');
+    if(deleteModal){
+      this.expensesService.setDeletedExpenseId(this.params.data.expenseId);
+    }
   }
 
   showEditModal(): any{

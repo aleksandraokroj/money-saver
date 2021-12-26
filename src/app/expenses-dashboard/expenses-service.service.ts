@@ -12,10 +12,16 @@ export class ExpensesService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public expenses: any;
+
   public editedExpense = new Observable((subscriber) => {
     subscriber.next('');
   });
   public editedExpenseSubject = new BehaviorSubject(this.editedExpense);
+
+  public deletedExpenseId = new Observable((subscriber) => {
+    subscriber.next(0);
+  });
+  public deletedExpenseIdSubject = new BehaviorSubject(this.deletedExpenseId);
 
   public getExpenses(): Observable<any> {
     return this.http.get('https://localhost:44330/api/Expenses');
@@ -31,6 +37,12 @@ export class ExpensesService {
   }
 
   public setEditedExpense(params: any): any {
+    console.log(params);
     this.editedExpenseSubject.next(params);
+  }
+
+  public setDeletedExpenseId(id: any): void{
+    console.log(id);
+    this.deletedExpenseIdSubject.next(id);
   }
 }

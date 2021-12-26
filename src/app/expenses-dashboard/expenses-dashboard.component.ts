@@ -20,12 +20,12 @@ export class ExpensesDashboardComponent implements OnInit {
   public expenses: any;
   public domLayout: string = 'autoHeight'
   public editedExpense: any;
+  public deletedExpenseId: any;
 
   private api: any;
   private columnApi: any;
   
   ngOnInit(): void {
-    this.editedExpense = '';
     this.getExpenses();
     this.setSubscriptions();
   }
@@ -75,19 +75,21 @@ export class ExpensesDashboardComponent implements OnInit {
     })
   }
   
-  deleteExpense(id: any): void{
-    const confirm = window.confirm('Czy na pewno chcesz usunąć ten wpis?');
-    if(confirm){
-      this.expensesService.deleteExpense(id).subscribe(res => {
+  deleteExpense(): void{
+      this.expensesService.deleteExpense(this.deletedExpenseId).subscribe(res => {
         this.getExpenses();
       });
-    }
   };
 
   setSubscriptions(): void{
     this.expensesService.editedExpenseSubject.subscribe(editedExpense => {
       this.editedExpense = editedExpense;
     });
+
+    this.expensesService.deletedExpenseIdSubject.subscribe(deletedExpenseId => {
+      this.deletedExpenseId = deletedExpenseId;
+      console.log(this.deletedExpenseId);
+    })
   }
 
 }
