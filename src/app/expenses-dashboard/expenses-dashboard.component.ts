@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef, GridOptions } from 'ag-grid-community';
 import { ExpensesService } from './expenses-service.service';
-import { SideBarComponent } from '../side-bar/side-bar.component';
 import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell-renderer.component';
+import { ExpenseCellRendererComponent } from '../expense-cell-renderer/expense-cell-renderer.component';
 
 @Component({
   selector: 'app-expenses-dashboard',
@@ -13,6 +13,7 @@ export class ExpensesDashboardComponent implements OnInit {
   rowData: any;
   frameworkComponents: any = {
     actionCellRenderer: ActionCellRendererComponent,
+    expenseCellRenderer: ExpenseCellRendererComponent
   };
 
   constructor(private expensesService: ExpensesService) {}
@@ -50,8 +51,13 @@ export class ExpensesDashboardComponent implements OnInit {
       width: 75,
       lockPinned: true,
     },
-    { field: 'expenseName', headerName: 'Nazwa'},
-    { field: 'expenseType', headerName: 'Typ', width: 150 },
+    { field: 'expenseName', headerName: 'Nazwa' },
+    {
+      field: 'expenseType',
+      headerName: 'Typ',
+      cellRenderer: 'expenseCellRenderer',
+      width: 150,
+    },
     { field: 'expenseCategory', headerName: 'Kategoria' },
     {
       field: 'expenseAmount',
@@ -59,7 +65,7 @@ export class ExpensesDashboardComponent implements OnInit {
       cellRenderer: (params) => params.value + ' zł',
       width: 150,
     },
-    { field: 'expenseDate', headerName: 'Data', width: 150, sortable:true },
+    { field: 'expenseDate', headerName: 'Data', width: 150, sortable: true },
   ];
 
   getExpenses(): void {
@@ -91,7 +97,7 @@ export class ExpensesDashboardComponent implements OnInit {
           expenseType: 'Wydatek',
           expenseCategory: '',
           expenseAmount: '',
-          expenseDate: ''
+          expenseDate: '',
         };
         this.getExpenses();
         console.log(this.newExpense);

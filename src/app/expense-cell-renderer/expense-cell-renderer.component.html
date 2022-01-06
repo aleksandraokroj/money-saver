@@ -1,0 +1,10 @@
+<div>
+  <i
+    class="fas"
+    [ngClass]="{
+      'fa-arrow-down expense': this.params.value === 'Wydatek',
+      'fa-arrow-up income': this.params.value === 'Przychód'
+    }"
+  ></i>
+  {{ this.params.value }}
+</div>

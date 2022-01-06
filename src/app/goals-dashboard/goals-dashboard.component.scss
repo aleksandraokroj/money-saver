@@ -1,3 +1,22 @@
 .wrapper-div {
     display: flex;
+    .table-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        .goals-table {
+            height: auto;
+            width: 73%;
+        }
+        .table-title {
+            margin: 20px;
+        }
+    }
+    .btn-add {
+        color: white;
+        background-color: #457604;
+        margin-top: 10px;
+        margin-left: 63%;
+    }
 }

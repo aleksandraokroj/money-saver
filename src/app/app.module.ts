@@ -13,7 +13,8 @@ import { GoalsDashboardComponent } from './goals-dashboard/goals-dashboard.compo
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { ActionCellRendererComponent } from './action-cell-renderer/action-cell-renderer.component';@NgModule({
+import { ActionCellRendererComponent } from './action-cell-renderer/action-cell-renderer.component';
+import { ExpenseCellRendererComponent } from './expense-cell-renderer/expense-cell-renderer.component';@NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
@@ -21,6 +22,7 @@ import { ActionCellRendererComponent } from './action-cell-renderer/action-cell-
     GoalsDashboardComponent,
     SideBarComponent,
     ActionCellRendererComponent,
+    ExpenseCellRendererComponent,
   ],
   imports: [
     BrowserModule,
