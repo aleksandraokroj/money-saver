@@ -16,7 +16,6 @@ export class ExpenseCellRendererComponent
 
   agInit(params: any): void {
     this.params = params;
-    console.log(this.params);
     return this.params.value;
   }
 

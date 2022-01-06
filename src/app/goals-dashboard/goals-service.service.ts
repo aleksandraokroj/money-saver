@@ -27,17 +27,17 @@ export class GoalsService {
     return this.http.get('https://localhost:44330/api/Goals');
   }
 
-  public postExpense(goal: any): Observable<any> {
+  public postGoal(goal: any): Observable<any> {
     const headers = {"Access-Control-Allow-Origin": "*"};
     return this.http.post('https://localhost:44330/api/Goals', goal, {headers});
   }
 
-  public editExpense(id: any, goal: any): Observable<any>{
+  public editGoal(id: any, goal: any): Observable<any>{
     const headers = {"Access-Control-Allow-Origin": "*"};
     return this.http.put('https://localhost:44330/api/Goals' + `/${id}`, goal, {headers});
   }
 
-  public deleteExpense(id: any): Observable<any> {
+  public deleteGoal(id: any): Observable<any> {
     return this.http.delete('https://localhost:44330/api/Goals' + `/${id}`);
   }
 
@@ -47,7 +47,7 @@ export class GoalsService {
   }
 
   public setDeletedGoalId(id: any): void{
-    console.log(id);
     this.deletedGoalIdSubject.next(id);
+    console.log(id);
   }
 }

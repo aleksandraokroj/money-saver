@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ExpensesService } from '../expenses-dashboard/expenses-service.service';
+import { GoalsService } from '../goals-dashboard/goals-service.service';
 import { ExpensesDashboardComponent } from '../expenses-dashboard/expenses-dashboard.component';
 
 @Component({
@@ -11,7 +12,11 @@ import { ExpensesDashboardComponent } from '../expenses-dashboard/expenses-dashb
 export class ActionCellRendererComponent
   implements OnInit, ICellRendererAngularComp
 {
-  constructor(private expensesService: ExpensesService, private expensesDashboard: ExpensesDashboardComponent) {}
+  constructor(
+    private expensesService: ExpensesService,
+    private expensesDashboard: ExpensesDashboardComponent,
+    private goalsService: GoalsService
+  ) {}
   params: any;
 
   ngOnInit(): void {}
@@ -25,18 +30,24 @@ export class ActionCellRendererComponent
     return false;
   }
 
-  showDeleteModal(): any{
+  showDeleteModal(): any {
     var deleteModal = document.getElementById('deleteModal');
-    if(deleteModal){
+    if (deleteModal && this.params.data.hasOwnProperty('expenseId')) {
       this.expensesService.setDeletedExpenseId(this.params.data.expenseId);
+    }
+    if (deleteModal && this.params.data.hasOwnProperty('goalId')) {
+      this.goalsService.setDeletedGoalId(this.params.data.goalId);
     }
   }
 
-  showEditModal(): any{
+  showEditModal(): any {
     var editModal = document.getElementById('editModal');
-    if(editModal){
+    if (editModal && this.params.data.hasOwnProperty('expenseId')) {
       this.expensesService.setEditedExpense(this.params.data);
+    }
+
+    if (editModal && this.params.data.hasOwnProperty('goalId')) {
+      this.goalsService.setEditedGoal(this.params.data);
     }
   }
 }
-

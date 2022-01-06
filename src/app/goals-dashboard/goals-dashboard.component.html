@@ -9,6 +9,7 @@
       [domLayout]="domLayout"
       [pagination]="true"
       [paginationPageSize]="paginationPageSize"
+      [frameworkComponents]="frameworkComponents"
       (gridReady)="onGridReady($event)"
     >
     </ag-grid-angular>
@@ -18,7 +19,69 @@
       data-bs-toggle="modal"
       data-bs-target="#addModal"
     >
-      <i class="fas fa-plus"></i> Dodaj wpis
+      <i class="fas fa-plus"></i> Dodaj cel
     </button>
   </div>
 </div>
+<!--Add modal-->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj cel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Nazwa</label><input class="form-control" type="text" placeholder="Nazwa" [(ngModel)]="newGoal.goalName">
+        <label>Kategoria</label><input class="form-control" type="text" placeholder="Kategoria" [(ngModel)]="newGoal.goalCategory">
+        <label>Kwota</label><input class="form-control" type="number" placeholder="Kwota" [(ngModel)]="newGoal.goalAmount">
+        <label>Uzbierane</label><input class="form-control" type="number" placeholder="Uzbierane" [(ngModel)]="newGoal.goalProgress">
+        <label>Do kiedy</label><input class="form-control" type="date"[(ngModel)]="newGoal.goalDate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-save" (click)="postGoal()" data-bs-dismiss="modal">Dodaj</button>
+      </div>
+    </div>
+  </div>
+ </div>
+<!--Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Usuń cel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="delete-mesage">Czy na pewno chcesz usunąć ten cel?</span>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
+        <button type="button" (click)="deleteGoal()" id="deleteButton" class="btn btn-save" data-bs-dismiss="modal">Usuń</button>
+      </div>
+    </div>
+  </div>
+ </div>
+ </div>
+<!--Modal edit-->
+ <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edytuj cel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Nazwa</label><input class="form-control" type="text" [value]="editedGoal.goalName" [(ngModel)]="editedGoal.goalName">
+        <label>Kategoria</label><input class="form-control" type="text" [value]="editedGoal.goalCategory" [value]="editedGoal.goalCategory">
+        <label>Kwota</label><input class="form-control" type="number" [value]="editedGoal.goalAmount" [(ngModel)]="editedGoal.goalAmount">
+        <label>Uzbierane</label><input class="form-control" type="number" [value]="editedGoal.goalProgress" [(ngModel)]="editedGoal.goalProgress">
+        <label>Do kiedy</label><input class="form-control" type="date" [value]="editedGoal.goalDate"[(ngModel)]="editedGoal.goalDate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-save" (click)="editGoal()" data-bs-dismiss="modal">Zapisz</button>
+      </div>
+    </div>
+  </div>
+ </div>

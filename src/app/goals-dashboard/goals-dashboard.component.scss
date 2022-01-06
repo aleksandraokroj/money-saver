@@ -20,3 +20,23 @@
         margin-left: 63%;
     }
 }
+
+.modal-body {
+    margin: 5px;
+}
+
+label,
+.form-control,
+.form-select {
+    margin-bottom: 5px;
+}
+
+.btn-save {
+    color: white;
+    background-color: #6c63ff;
+}
+
+.modal-footer {
+    border-top: none;
+    margin-top: 5px;
+}

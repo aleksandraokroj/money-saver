@@ -100,7 +100,6 @@ export class ExpensesDashboardComponent implements OnInit {
           expenseDate: '',
         };
         this.getExpenses();
-        console.log(this.newExpense);
       });
   }
 
@@ -120,7 +119,6 @@ export class ExpensesDashboardComponent implements OnInit {
     this.expensesService.deletedExpenseIdSubject.subscribe(
       (deletedExpenseId) => {
         this.deletedExpenseId = deletedExpenseId;
-        console.log(this.deletedExpenseId);
       }
     );
   }
