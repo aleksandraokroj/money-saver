@@ -15,7 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { ActionCellRendererComponent } from './action-cell-renderer/action-cell-renderer.component';
 import { ExpenseCellRendererComponent } from './expense-cell-renderer/expense-cell-renderer.component';
-import { ProgressCellRendererComponent } from './progress-cell-renderer/progress-cell-renderer.component';@NgModule({
+import { ProgressCellRendererComponent } from './progress-cell-renderer/progress-cell-renderer.component';
+import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.component';@NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
@@ -25,6 +26,7 @@ import { ProgressCellRendererComponent } from './progress-cell-renderer/progress
     ActionCellRendererComponent,
     ExpenseCellRendererComponent,
     ProgressCellRendererComponent,
+    StatsDashboardComponent,
   ],
   imports: [
     BrowserModule,

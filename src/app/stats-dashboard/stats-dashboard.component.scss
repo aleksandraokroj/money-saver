@@ -1,0 +1,12 @@
+.wrapper-div {
+    display: flex;
+    .charts-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        .charts-title {
+            margin: 20px;
+        }
+    }
+}
