@@ -3,6 +3,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { ExpensesService } from './expenses-service.service';
 import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell-renderer.component';
 import { ExpenseCellRendererComponent } from '../expense-cell-renderer/expense-cell-renderer.component';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-expenses-dashboard',
@@ -13,10 +14,13 @@ export class ExpensesDashboardComponent implements OnInit {
   rowData: any;
   frameworkComponents: any = {
     actionCellRenderer: ActionCellRendererComponent,
-    expenseCellRenderer: ExpenseCellRendererComponent
+    expenseCellRenderer: ExpenseCellRendererComponent,
   };
 
-  constructor(private expensesService: ExpensesService) {}
+  constructor(
+    private expensesService: ExpensesService,
+    private authService: AuthServiceService
+  ) {}
 
   public expenses: any;
   public domLayout: string = 'autoHeight';
@@ -24,6 +28,7 @@ export class ExpensesDashboardComponent implements OnInit {
   public deletedExpenseId: any;
   public newExpense: any = {
     expenseType: 'Wydatek',
+    userId: this.authService.getCookie('userId'),
   };
   public paginationPageSize: number = 10;
 
@@ -31,8 +36,8 @@ export class ExpensesDashboardComponent implements OnInit {
   private columnApi: any;
 
   ngOnInit(): void {
-    this.getExpenses();
     this.setSubscriptions();
+    this.getExpenses();
   }
 
   onGridReady = (params: any) => {
@@ -69,20 +74,26 @@ export class ExpensesDashboardComponent implements OnInit {
   ];
 
   getExpenses(): void {
-    this.expensesService.getExpenses().subscribe((res) => {
-      this.rowData = res;
-      this.rowData.forEach(
-        (expense: { expenseDate: string; expenseAmount: any }) => {
-          expense.expenseAmount = expense.expenseAmount.toFixed(2);
-          expense.expenseDate = expense.expenseDate.slice(0, 10);
-        }
-      );
-    });
+    this.expensesService
+      .getExpenses(this.authService.getCookie('userId'))
+      .subscribe((res) => {
+        this.rowData = res;
+        this.rowData.forEach(
+          (expense: { expenseDate: string; expenseAmount: any }) => {
+            expense.expenseAmount = expense.expenseAmount.toFixed(2);
+            expense.expenseDate = expense.expenseDate.slice(0, 10);
+          }
+        );
+      });
   }
 
   postExpense(): void {
+    this.newExpense.userId = this.authService.getCookie('userId');
     this.expensesService.postExpense(this.newExpense).subscribe((res) => {
       this.getExpenses();
+      this.newExpense = {
+        expenseType: 'Wydatek',
+      };
     });
   }
 
@@ -92,13 +103,6 @@ export class ExpensesDashboardComponent implements OnInit {
     this.expensesService
       .editExpense(this.editedExpense.expenseId, this.editedExpense)
       .subscribe((res) => {
-        this.newExpense = {
-          expenseName: '',
-          expenseType: 'Wydatek',
-          expenseCategory: '',
-          expenseAmount: '',
-          expenseDate: '',
-        };
         this.getExpenses();
       });
   }

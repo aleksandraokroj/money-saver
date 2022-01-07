@@ -23,8 +23,8 @@ export class ExpensesService {
   });
   public deletedExpenseIdSubject = new BehaviorSubject(this.deletedExpenseId);
 
-  public getExpenses(): Observable<any> {
-    return this.http.get('https://localhost:44330/api/Expenses');
+  public getExpenses(id: number): Observable<any> {
+    return this.http.get('https://localhost:44330/api/Expenses' + `/${id}`);
   }
 
   public postExpense(expense: any): Observable<any> {
@@ -42,12 +42,10 @@ export class ExpensesService {
   }
 
   public setEditedExpense(params: any): any {
-    console.log(params);
     this.editedExpenseSubject.next(params);
   }
 
   public setDeletedExpenseId(id: any): void{
-    console.log(id);
     this.deletedExpenseIdSubject.next(id);
   }
 }

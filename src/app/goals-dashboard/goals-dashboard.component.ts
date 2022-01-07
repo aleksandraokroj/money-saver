@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { GoalsService } from './goals-service.service';
+import { AuthServiceService } from '../auth-service.service';
 import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell-renderer.component';
 import { ProgressCellRendererComponent } from '../progress-cell-renderer/progress-cell-renderer.component';
 @Component({
@@ -24,7 +25,7 @@ export class GoalsDashboardComponent implements OnInit {
   private api: any;
   private columnApi: any;
 
-  constructor(private goalsService: GoalsService) {}
+  constructor(private goalsService: GoalsService, private authService: AuthServiceService) {}
 
   ngOnInit(): void {
     this.getGoals();
@@ -65,7 +66,7 @@ export class GoalsDashboardComponent implements OnInit {
   ];
 
   private getGoals() {
-    this.goalsService.getGoals().subscribe((res) => {
+    this.goalsService.getGoals(this.authService.getCookie('userId')).subscribe((res) => {
       this.rowData = res;
       this.rowData.forEach((goal: { goalDate: string; goalAmount: any }) => {
         goal.goalAmount = goal.goalAmount.toFixed(2);
@@ -75,6 +76,7 @@ export class GoalsDashboardComponent implements OnInit {
   }
 
   public postGoal(): void {
+    this.newGoal.userId = this.authService.getCookie('userId');
     this.goalsService.postGoal(this.newGoal).subscribe((res) => {
       this.getGoals();
       this.newGoal = {};

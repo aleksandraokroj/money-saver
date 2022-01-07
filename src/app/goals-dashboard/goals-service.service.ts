@@ -23,8 +23,8 @@ export class GoalsService {
   });
   public deletedGoalIdSubject = new BehaviorSubject(this.deletedGoalId);
 
-  public getGoals(): Observable<any> {
-    return this.http.get('https://localhost:44330/api/Goals');
+  public getGoals(id: number): Observable<any> {
+    return this.http.get('https://localhost:44330/api/Goals'+ `/${id}`);
   }
 
   public postGoal(goal: any): Observable<any> {
@@ -42,12 +42,10 @@ export class GoalsService {
   }
 
   public setEditedGoal(params: any): any {
-    console.log(params);
     this.editedGoalSubject.next(params);
   }
 
   public setDeletedGoalId(id: any): void{
     this.deletedGoalIdSubject.next(id);
-    console.log(id);
   }
 }

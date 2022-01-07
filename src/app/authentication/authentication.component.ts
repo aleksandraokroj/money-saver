@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { AuthServiceService } from '../auth-service.service';
 import { HttpClient } from  '@angular/common/http';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-authentication',
