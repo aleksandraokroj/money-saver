@@ -13,7 +13,12 @@ export class SideBarComponent implements OnInit {
     private authService: AuthServiceService
   ) {}
 
-  ngOnInit(): void {}
+  public userName: any = '';
+
+  ngOnInit(): void {
+    this.userName = this.authService.getCookie('userName');
+    if(!!this.userName) this.userName = "Użytkowniku"
+  }
 
   public logOut(): void {
     this.deleteAllCookies();

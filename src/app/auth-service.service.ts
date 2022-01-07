@@ -10,6 +10,7 @@ export class AuthServiceService {
 
   registerUser(user: {
     Email: string;
+    FirstName: string;
     Password: string;
     ConfirmPassword: string;
   }) {
@@ -19,6 +20,7 @@ export class AuthServiceService {
         'https://localhost:44330/api/account/register',
         {
           Email: user.Email,
+          FirstName: user.FirstName,
           Password: user.Password,
           ConfirmPassword: user.ConfirmPassword,
         },
@@ -43,6 +45,7 @@ export class AuthServiceService {
       )
       .subscribe((data: any) => {
         this.setCookie('userId', data.id, 30);
+        this.setCookie('userName', data.firstName, 30);
         this.router.navigate(['/expenses']);
       });
   }
@@ -62,9 +65,10 @@ export class AuthServiceService {
     cArr.forEach((val) => {
       if (val.indexOf(name) === 0) res = val.substring(name.length);
     });
-    if (res) {
+    if (res && cName==="userId") {
       const resHelper: number = +res;
       return resHelper;
     }
+    return res
   }
 }
