@@ -1,6 +1,61 @@
 <div class="wrapper-div">
-    <app-side-bar> </app-side-bar>
-    <div class="charts-div">
+  <app-side-bar> </app-side-bar>
+  <div class="charts-div">
+    <div class="title-div">
       <h1 class="charts-title">Twoje statystki</h1>
+      <div class="charts-select">
+        <select class="form-select month" [(ngModel)]="this.month"  (ngModelChange)="getMonthlyStats()" >
+          <option [ngValue]="1">Styczeń</option>
+          <option [ngValue]="2">Luty</option>
+          <option [ngValue]="3">Marzec</option>
+          <option [ngValue]="4">Kwiecień</option>
+          <option [ngValue]="5">Maj</option>
+          <option [ngValue]="6">Czerwiec</option>
+          <option [ngValue]="7" selected>Lipiec</option>
+          <option [ngValue]="8">Sierpień</option>
+          <option [ngValue]="9">Wrzesień</option>
+          <option [ngValue]="10">Październik</option>
+          <option [ngValue]="11">Listopad</option>
+          <option [ngValue]="12">Grudzień</option>
+        </select>
+        <select class="form-select year" [(ngModel)]="year" (ngModelChange)="getMonthlyStats()">
+          <option [ngValue]="2022">2022</option>
+          <option [ngValue]="2021" selected>2021</option>
+          <option [ngValue]="2020">2020</option>
+        </select>
+      </div>
     </div>
+    <div class="amount-charts">
+      <ngx-chartjs
+        class="month-chart"
+        type="bar"
+        [data]="expenseData"
+        [options]="options"
+        *ngIf="this.expenseDataLoaded"
+      ></ngx-chartjs>
+      <ngx-chartjs
+        class="month-chart"
+        type="bar"
+        [data]="incomeData"
+        [options]="options"
+        *ngIf="this.incomeDataLoaded"
+      ></ngx-chartjs>
+    </div>
+    <div class='category-charts'>
+      <div class='category-chart-div'>
+      <ngx-chartjs
+        type='doughnut'
+        class = 'category-chart'
+        [data]="categoryData"
+        [options]="categoryOptions"
+        *ngIf="this.categoryDataLoaded"
+      ></ngx-chartjs>
+      </div>
+      <div class='summary'>
+        <span class='summary-title'>Łącznie w tym miesiącu: </span>
+        <span class="summary-expenses"><i class="fas fa-arrow-down"></i> Wydatki: {{monthExpense}} zł</span>
+        <span class="summary-income"><i class="fas fa-arrow-up"></i> Przychody: {{monthIncome}} zł</span>
+      </div>
+    </div>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { ExpensesService } from './expenses-service.service';
 import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell-renderer.component';
 import { ExpenseCellRendererComponent } from '../expense-cell-renderer/expense-cell-renderer.component';
 import { AuthServiceService } from '../auth-service.service';
+import { StatsService } from '../stats-dashboard/stats-service.service';
 
 @Component({
   selector: 'app-expenses-dashboard',
@@ -19,7 +20,8 @@ export class ExpensesDashboardComponent implements OnInit {
 
   constructor(
     private expensesService: ExpensesService,
-    private authService: AuthServiceService
+    private authService: AuthServiceService, 
+    private statsService: StatsService
   ) {}
 
   public expenses: any;

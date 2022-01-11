@@ -26,7 +26,7 @@
      </div>
      <div class="modal-body">
        <label>Nazwa</label><input class="form-control" type="text" [value]="editedExpense.expenseName" [(ngModel)]="editedExpense.expenseName">
-       <label>Typ</label><select class="form-select" aria-label="Default select example" [value]="editedExpense.expenseType" [(ngModel)]="editedExpense.expenseType">
+       <label>Typ</label><select class="form-select" [value]="editedExpense.expenseType" [(ngModel)]="editedExpense.expenseType">
         <option value="Wydatek">Wydatek</option>
         <option value="Przychód">Przychód</option>
       </select>

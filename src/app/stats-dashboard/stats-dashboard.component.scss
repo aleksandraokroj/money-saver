@@ -1,12 +1,69 @@
-.wrapper-div {
-    display: flex;
-    .charts-div {
+    .wrapper-div {
         display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        .charts-title {
-            margin: 20px;
+        .charts-div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            .title-div {
+                display: flex;
+                .charts-title {
+                    margin: 20px;
+                }
+                .charts-select {
+                    display: flex;
+                    margin: 20px;
+                    .month {
+                        margin-right: 10px;
+                        width: 150px;
+                    }
+                    .year {
+                        width: 150px;
+                    }
+                }
+            }
+            .amount-charts {
+                display: flex;
+                width: inherit;
+                .month-chart {
+                    width: 50%;
+                    padding: 10px;
+                }
+            }
+            .category-charts {
+                display: flex;
+                width: inherit;
+                .category-chart-div {
+                    display: flex;
+                    justify-content: center;
+                    width: 50%;
+                    .category-chart {
+                        padding: 10px;
+                    }
+                }
+                .summary {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50%;
+                    margin-bottom: 15px;
+                    .summary-title {
+                        font-size: 30px;
+                    }
+                    .summary-expenses {
+                        font-size: 20px;
+                        color: rgb(181, 0, 0);
+                    }
+                    .summary-income {
+                        font-size: 20px;
+                        color: rgb(69, 118, 4);
+                        margin-right: 17px;
+                    }
+                }
+            }
+        }
+        .expenseChart {
+            display: flex;
         }
     }
-}
