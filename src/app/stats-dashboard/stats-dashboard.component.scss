@@ -33,6 +33,7 @@
             .category-charts {
                 display: flex;
                 width: inherit;
+                height: 300px;
                 .category-chart-div {
                     display: flex;
                     justify-content: center;
@@ -51,14 +52,17 @@
                     .summary-title {
                         font-size: 30px;
                     }
-                    .summary-expenses {
-                        font-size: 20px;
-                        color: rgb(181, 0, 0);
-                    }
-                    .summary-income {
-                        font-size: 20px;
-                        color: rgb(69, 118, 4);
-                        margin-right: 17px;
+                    .summary-container {
+                        display: flex;
+                        flex-direction: column;
+                        .summary-expenses {
+                            font-size: 20px;
+                            color: rgb(181, 0, 0);
+                        }
+                        .summary-income {
+                            font-size: 20px;
+                            color: rgb(69, 118, 4);
+                        }
                     }
                 }
             }

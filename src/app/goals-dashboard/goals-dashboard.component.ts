@@ -90,8 +90,8 @@ export class GoalsDashboardComponent implements OnInit {
   }
 
   public editGoal(): void {
-    const goalAmountHelper: number = +this.editedGoal.expenseAmount;
-    this.editedGoal.expenseAmount = goalAmountHelper;
+    const goalAmountHelper: number = +this.editedGoal.goalAmount;
+    this.editedGoal.goalAmount = goalAmountHelper;
     this.goalsService
       .editGoal(this.editedGoal.goalId, this.editedGoal)
       .subscribe((res) => {

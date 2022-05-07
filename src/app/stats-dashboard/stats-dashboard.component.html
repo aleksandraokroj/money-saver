@@ -48,13 +48,15 @@
         class = 'category-chart'
         [data]="categoryData"
         [options]="categoryOptions"
-        *ngIf="this.categoryDataLoaded"
+        *ngIf="this.categoryDataLoaded && !!this.categoryData.datasets[0].data.length"
       ></ngx-chartjs>
       </div>
       <div class='summary'>
         <span class='summary-title'>Łącznie w tym miesiącu: </span>
+        <div class='summary-container'>
         <span class="summary-expenses"><i class="fas fa-arrow-down"></i> Wydatki: {{monthExpense}} zł</span>
         <span class="summary-income"><i class="fas fa-arrow-up"></i> Przychody: {{monthIncome}} zł</span>
+        </div>
       </div>
     </div>
   </div>

@@ -26,13 +26,14 @@ export class StatsService {
   public getMonthlyCategoryStats(
     id: number,
     month: number,
-    year: number
+    year: number, type: string
   ): Observable<any> {
     return this.http.get(
       'https://localhost:44330/api/Expenses/monthStatCategory' +
         `/${id}` +
         `/${month}` +
-        `/${year}`
+        `/${year}` +
+        `/${type}`
     );
   }
 }

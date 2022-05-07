@@ -10,7 +10,7 @@ import { StatsService } from './stats-service.service';
 })
 export class StatsDashboardComponent implements OnInit {
   public monthData: any;
-  public month: number = 1;
+  public month: number = 2;
   public year: number = 2022;
   public expenseDataLoaded: boolean = false;
   public incomeDataLoaded: boolean = false;
@@ -41,7 +41,11 @@ export class StatsDashboardComponent implements OnInit {
           'rgba(245, 40, 145, 0.8)',
           'rgba(245, 39, 39, 0.8)',
           'rgba(39, 93, 245, 0.8)',
-          'rgba(245, 191, 39, 0.8)'
+          'rgba(245, 191, 39, 0.8)',
+          'rgb(156, 246, 246)',
+          'rgb(237, 246, 125)',
+          'rgb(255, 136, 17)',
+          'rgb(69, 80, 59)',
         ],
         hoverOffset: 4,
       },
@@ -69,7 +73,6 @@ export class StatsDashboardComponent implements OnInit {
         borderColor: ['rgb(69, 118, 4)'],
         backgroundColor: ['rgb(69, 118, 4)'],
         barThickness: 20,
-        
       },
     ],
   };
@@ -87,11 +90,12 @@ export class StatsDashboardComponent implements OnInit {
       legend: {
         title: {
           display: true,
-          text: 'Kategorie wpisów'},
+          text: 'Kategorie wpisów',
+        },
         position: 'right',
-      }
-    }
-  }
+      },
+    },
+  };
 
   public getMonthlyStats(): void {
     this.getMonthlyExpenseStats(this.month, this.year);
@@ -100,7 +104,10 @@ export class StatsDashboardComponent implements OnInit {
   }
 
   private countOccurrences(arr: any[]) {
-    return arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
+    return arr.reduce(
+      (prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev),
+      {}
+    );
   }
 
   private getCategoryStats(month: number, year: number): void {
@@ -109,14 +116,15 @@ export class StatsDashboardComponent implements OnInit {
       .getMonthlyCategoryStats(
         this.authService.getCookie('userId'),
         month,
-        year
+        year,
+        'Wydatek'
       )
       .subscribe((res) => {
         this.categoryData.datasets[0].data = [];
         this.categoryData.labels = [];
         this.categories = [];
         this.monthCategoryData = res;
-        this.monthCategoryData.forEach((expense: { expenseCategory: any; }) => {
+        this.monthCategoryData.forEach((expense: { expenseCategory: any }) => {
           this.categories.push(expense.expenseCategory);
         });
         const categoriesOccurances = this.countOccurrences(this.categories);
@@ -130,6 +138,8 @@ export class StatsDashboardComponent implements OnInit {
   }
 
   private getMonthlyExpenseStats(month: number, year: number): void {
+    const monthExpenseHelper: number = 0;
+    this.monthExpense = 0;
     this.expenseDataLoaded = false;
     this.statsService
       .getMonthlyStats(
@@ -148,7 +158,6 @@ export class StatsDashboardComponent implements OnInit {
               expenseDate: string;
               expenseAmount: any;
               expenseType: any;
-
             },
             index: number
           ) => {
@@ -161,7 +170,7 @@ export class StatsDashboardComponent implements OnInit {
             ) {
               this.expenseData.datasets[0].data[length - 1] =
                 +expenseAmountHelper;
-                this.monthExpense += expenseAmountHelper;
+              this.monthExpense += expenseAmountHelper;
             } else {
               this.expenseData.labels?.push(expense.expenseDate);
               this.expenseData.datasets[0].data.push(expenseAmountHelper);
@@ -169,10 +178,13 @@ export class StatsDashboardComponent implements OnInit {
             }
           }
         );
+        const monthExpenseHelper: number = +this.monthExpense.toFixed(2);
+        this.monthExpense = monthExpenseHelper;
         this.expenseDataLoaded = true;
       });
   }
   private getMonthlyIncomeStats(month: number, year: number): void {
+    this.monthIncome = 0;
     this.incomeDataLoaded = false;
     this.statsService
       .getMonthlyStats(
@@ -203,14 +215,17 @@ export class StatsDashboardComponent implements OnInit {
             ) {
               this.incomeData.datasets[0].data[length - 1] =
                 +expenseAmountHelper;
-                this.monthIncome += expenseAmountHelper;
+              this.monthIncome += expenseAmountHelper;
             } else {
               this.incomeData.labels?.push(expense.expenseDate);
               this.incomeData.datasets[0].data.push(expenseAmountHelper);
               this.monthIncome += expenseAmountHelper;
+              this.monthIncome.toFixed(2);
             }
           }
         );
+        const monthIncomeHelper: number = +this.monthIncome.toFixed(2);
+        this.monthIncome = monthIncomeHelper;
         this.incomeDataLoaded = true;
       });
   }

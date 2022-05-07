@@ -5,6 +5,7 @@ import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell
 import { ExpenseCellRendererComponent } from '../expense-cell-renderer/expense-cell-renderer.component';
 import { AuthServiceService } from '../auth-service.service';
 import { StatsService } from '../stats-dashboard/stats-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expenses-dashboard',
@@ -21,7 +22,8 @@ export class ExpensesDashboardComponent implements OnInit {
   constructor(
     private expensesService: ExpensesService,
     private authService: AuthServiceService, 
-    private statsService: StatsService
+    private statsService: StatsService,
+    private router: Router,
   ) {}
 
   public expenses: any;
@@ -38,8 +40,13 @@ export class ExpensesDashboardComponent implements OnInit {
   private columnApi: any;
 
   ngOnInit(): void {
+    if(this.authService.getCookie('userId')){
     this.setSubscriptions();
     this.getExpenses();
+    }
+    else{
+      this.router.navigate(['/auth']);
+    }
   }
 
   onGridReady = (params: any) => {

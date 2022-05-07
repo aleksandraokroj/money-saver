@@ -17,7 +17,7 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = this.authService.getCookie('userName');
-    if(!!this.userName) this.userName = "Użytkowniku"
+    if(!this.userName) this.userName = "Użytkowniku"
   }
 
   public logOut(): void {
